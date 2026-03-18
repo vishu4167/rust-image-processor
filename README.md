@@ -1,58 +1,86 @@
 #Rust Image Processor
 
-A CLI-based image processing tool built in Rust.
-Supports grayscale, invert, brightness adjustment, and rotation.
+A high-performance image processing tool built in Rust with both CLI and REST API support.
+Supports grayscale, invert, brightness adjustment, and rotation with parallel processing.
 
-## Requirements
+#Features
 
-- Rust installed  
-- Cargo (comes with Rust)
+CLI-based image processing
+
+REST API for real-time image transformation
+
+Parallel image processing using Rayon
+
+Async request handling using Tokio + Axum
+
+Supports multiple image operations
+
+#Requirements
+
+Rust installed
+
+Cargo (comes with Rust)
 
 Check installation:
 
-```bash
 rustc --version
 cargo --version
-```
 
-If not installed, download Rust from: https://rust-lang.org
+If not installed: https://rust-lang.org
 
-##  Setup & Run
+#Setup
+Clone the repository
+git clone https://github.com/vishu4167/rust-image-processor.git
+cd rust-image-processor
 
-### 1️.Clone the repository
+CLI Usage
 
-```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
-```
+Run the project:
 
-### 2. Run the project
-
-```bash
 cargo run -- <input_image> <output_image> [OPTIONS]
-```
 
 For optimized performance:
 
-```bash
 cargo run --release -- <input_image> <output_image> [OPTIONS]
-```
-
----
-
-##  Available Options
-
-- `--grayscale` → Convert image to grayscale  
-- `--invert` → Invert image colors  
-- `--brightness <value>` → Adjust brightness (e.g. 50 or -70)  
-- `--rotate <90|180|270>` → Rotate image  
-
----
-
-##  Example
-
-```bash
+Example
 cargo run -- input.jpg output.jpg --grayscale --brightness 40 --rotate 90
-```
 
-The processed image will be saved with the output file name you provide.
+#API Usage
+Start the server
+cargo run -- --api
+
+Server runs at:
+
+http://127.0.0.1:3000
+Send request (Linux / macOS)
+curl -X POST "http://127.0.0.1:3000/process?grayscale=true&rotate=90" \
+-F "file=@input.jpg" \
+-o result.jpg
+Send request (Windows PowerShell)
+curl.exe -X POST "http://127.0.0.1:3000/process?grayscale=true&rotate=90" -F "file=@input.jpg" -o result.jpg
+
+#Options
+CLI Options
+
+--grayscale → Convert image to grayscale
+
+--invert → Invert image colors
+
+--brightness <value> → Adjust brightness
+
+--rotate <90|180|270> → Rotate image
+
+API Query Parameters
+
+grayscale=true
+
+invert=true
+
+brightness=<value>
+
+rotate=<90|180|270>
+
+
+Clap
+
+Image crate
