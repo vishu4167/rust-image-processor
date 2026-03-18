@@ -81,6 +81,4 @@ brightness=<value>
 rotate=<90|180|270>
 
 
-Clap
 
-Image crate
